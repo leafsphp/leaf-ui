@@ -240,6 +240,39 @@ class WynterCSS extends \Leaf\UI {
 		return self::div($props, $children);
 	}
 
+	public static function _tile(array $props, array $children = [])
+	{
+		$props["class"] = isset($props["class"])  ? $props["class"] . " tile" : "tile";
+		if (isset($props["icon"])) {
+			$icon = $props["icon"];
+			unset($props["icon"]);
+		}
+		if (isset($props["title"])) {
+			$title = $props["title"];
+			unset($props["title"]);
+		}
+		if (isset($props["subtitle"])) {
+			$subs = $props["subtitle"];
+			unset($props["subtitle"]);
+		}
+		if (isset($props["action"])) {
+			$action = $props["action"];
+			unset($props["action"]);
+		}
+		return self::div($props, (!isset($props["mode"]) || $props["mode"] == "manual") ? $children : [
+			self::div(["class" => "tile-icon"], [
+				isset($icon) ? $icon : null,
+			]),
+			self::div(["class" => "tile-content"], [
+				self::_container([
+					self::p($title, ["class" => "tile-title"]),
+					isset($subs) ? self::p($subs, ["class" => "tile-subtitle"]) : null,
+				])
+			]),
+			isset($action) ? self::div(["class" => "tile-action"], $action) : null,
+		]);
+	}
+
 	public static function _xCard(array $props = [], array $options = ["title" => "Card"])
 	{
 		return self::_card($props, [

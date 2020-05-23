@@ -130,6 +130,18 @@ $html = $ui::body([
 			$ui::p("Lorem ipsum dolor sit amet, consectetur adipiscing elit."),
 		]),
 		$ui::_notify("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", ["variant" => "primary"]),
+		$ui::hr(),
+		$ui::h2("Tiles"),
+		$ui::_tile([
+			"mode" => "auto",
+			"icon" => $ui::_avatar("./1.jpg", "", ["size" => "xl"]),
+			"title" => "The Avengers",
+			"subtitle" => "Earth's Mightiest Heroes joined forces to take on threats that were too big for any one hero to tackle...",
+			"action" => $ui::_btnGroup([
+				$ui::_button("Join Us", ["variant" => "primary"]),
+				$ui::_button("View Us"),
+			])
+		]),
 		$ui::br(),
 		$ui::br(),
 	])
