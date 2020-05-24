@@ -87,7 +87,7 @@ class WynterCSS extends \Leaf\UI {
 			$props["class"] .= " tooltip";
 			$props["data-tooltip"] = $value;
 		}
-		$show = isset($props["show-value"]) ? $value : "";
+		$show = (isset($props["show-value"]) && $props["show-value"] == true) ? $value : "";
 		return self::div($props, $show);
 	}
 
