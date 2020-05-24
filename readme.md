@@ -191,7 +191,7 @@ $ui::_card([], [
 ]);
 ```
 
-Checkout [_xCard](/?id=_xCard) for an "automated" version.
+Checkout [_xCard](?id=_xCard) for an "automated" version.
 
 ### _carousel
 
