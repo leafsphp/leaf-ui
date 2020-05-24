@@ -1,72 +1,83 @@
-# Leaf UI
+# Leaf UI: Wynter Components
 
 Leaf UI is a PHP library for building user interfaces.
 
-Leaf UI simply takes away the 100s of lines of crazy HTML you'd need to write, so you can focus on only PHP. Leaf UI doesn't need a new compiler or any extensive compiling, it's just the same old PHP you write everyday; as such, you can build full scaleable Leaf UI powered apps or just sprinkle Leaf UI into your existing HTML/PHP code.
+This package combines the base wynter UI with Wynter CSS, in order to use Wynter CSS based components.
 
-## Installing Leaf UI
+Wynter CSS is a CSS Framework (work-in-progress) based on [spectre CSS](https://picturepan2.github.io/spectre/). So, with Leaf UI - Wynter Components, you can build your amazing frontends without any additional CSS or Javascript.
 
-Like most PHP libraries, we recommend installing Leaf UI with [composer](//getcomposer.org). Just open up your console and type:
+## Basic Usage
 
-```bash
-composer require leafs/ui
-```
-
-This will install Leaf UI into your application. You don't have to worry about bloating your application: Leaf UI has no external dependencies.
-
-After this, you can use all of Leaf UI's methods and components.
-
-View the [mini documentation here](//leafphp.netlify.app/#/2.1/views/ui/)
-
-## Working With Templates
-
-Templates provide a quick way to scaffold a Leaf UI without sweating the tiny details. To get started, simply swap out the main the `Leaf\UI` package for `Leaf\UI\Template`.
+Since Leaf UI deals with static components, there's no need to initialise the class if you don't want to. So we simply call:
 
 ```php
-use Leaf\UI\Template as UI;
+Leaf\UI\WynterCSS::component();
 
-UI::element(...);
+# or
+
+use Leaf\UI\WynterCSS as UI;
+
+UI::component();
+
+# or
+
+$ui = new Leaf\UI\WynterCSS;
+
+$ui::component();
 ```
+
+After this, you can use any Wynter component.
+
+**Note that** since `Leaf\UI\WynterCSS` is still Leaf UI, you should familiarize yourself with Leaf UI base first, though not compulsory, this is recommended.
+
+## Wynter Components
+
+This is a basic guide to the components prepared for you. Since these are all custom components, they start with `_`. This is not a compulsory naming convention for custom components, but it's adviced.
+
+### render
+
+Render just like the base `render` method renders a Leaf UI. However, unlike the default render, wynter css' render method attaches links to wynter css files. It takes in 2 parameters:
+
+- The Leaf UI to render
+- A string to render before the Leaf UI
 
 ```php
-$ui = new Leaf\UI\Template;
-
-$ui::element(...);
+$ui::render($ui::p("This is a paragraph"), "Something here");
 ```
 
-### Template Methods
+### _avatar
 
-#### _template
+This is renders a wynter css based avatar component. It takes in 4 params
 
-This method let's you create a plain HTML structure consisting which looks somewhat like this when rendered:
+- An image, if available
+- A text avatar placeholder (optional, string), used when image is loading or unavailable
+- Avatar props (optional, array)
+- Children, if any (optional, array)
 
-```html
-<!Doctype html  id="1590108145!Doctype html" />
-<html  id="1590108145html">
-	<head  id="1590108145head">
-		<title  id="1590108145title">{ Title Here }</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1"  id="1590108145meta" />
-		<link href="vendor/leafs/ui/src/UI/default/default.css" rel="stylesheet"  id="1590108145link" />
-		{ Other Head Elements Here}
-	</head>
-	<body  id="1590108145body">
-		{ Body Here }
-	</body>
-</html>
+```php
+$ui::_avatar("./image.jpg");
+$ui::_avatar("./image.jpg", "MD");
+$ui::_avatar("", "MD");
 ```
 
-Usage:
+_avatar also takes in special props which add extra functionality to the avatar.
 
-```js
-$html = (
-	$ui::_template("Title Here", [
-		// Body Components here
-	])
-);
+- size: The size of the avatar. Available values (xs, sm, md, lg, xl)
+- presence: Adds an "online indicator" to avatar. Available values (away, online, offline, busy)
+- badge: Adds a badge to avatar.
 
-$ui::render($html);
+```php
+$ui::_avatar("", "MD", ["size" => "xl", "presence" => "away", "badge" => "700"]);
 ```
 
-### Wynter CSS Integration
+### _badge
 
-Leaf UI with wynter css allows you to use wynter css components instead of raw HTML components. Wynter CSS is a CSS Framework (work-in-progress) based on [spectre CSS](https://picturepan2.github.io/spectre/). So, with Leaf UI - Wynter Components, you can build your amazing frontends without any additional CSS or Javascript.
+This renders a badge component. It takes in 3 params:
+
+- The badge text
+- Badge properties (optional, array)
+- Badge Children (optional, array|string)
+
+```php
+$ui::_badge("8000", [], "Notifications");
+```
