@@ -19,8 +19,7 @@ class Template extends \Leaf\UI {
 			self::head([
 				self::title($name),
 				self::meta("viewport", "width=device-width, initial-scale=1"),
-				// self::_style(self::_vendor("default/default.css")),
-				self::_style("src/UI/default/default.css"),
+				self::_style(self::_vendor("default/default.css")),
 				(!empty($head)) ? $head : null
 			]),
 			self::body($body)

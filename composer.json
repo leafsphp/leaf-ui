@@ -1,5 +1,5 @@
 {
-    "name": "leafs/ui",
+    "name": "leafs/uii",
     "description": "Leaf UI is a PHP library for building user interfaces",
     "type": "library",
     "license": "MIT",
@@ -16,5 +16,8 @@
             "Leaf\\": "src"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require": {
+        "leafs/ui": "dev-wynter"
+    }
 }

@@ -240,6 +240,10 @@ class WynterCSS extends \Leaf\UI {
 		return self::div($props, $children);
 	}
 
+	public static function _text() {
+		// implement text component
+	}
+
 	public static function _tile(array $props, array $children = [])
 	{
 		$props["class"] = isset($props["class"])  ? $props["class"] . " tile" : "tile";
