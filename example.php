@@ -49,7 +49,7 @@ require "./src/UI/WynterCSS.php";
 $ui = new Leaf\UI\WynterCSS;
 
 $html = $ui::body([
-	$ui::_preloader($ui::h2("Loading Demo...")),
+	$ui::_preloader($ui::h2("Loading Demo..")),
 	$ui::_container([
 		$ui::h2("Avatar"),
 		$ui::_avatar("", "MD", ["size" => "xl", "presence" => "away", "badge" => "700"]),
