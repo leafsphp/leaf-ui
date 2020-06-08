@@ -204,6 +204,20 @@ class UI
 	}
 
 	/**
+	 * Join multiple elements
+	 * 
+	 * @param mixed $elements Elements to merge
+	 */
+	public static function merge(...$elements)
+	{
+		$data = "";
+		foreach ($elements as $el) {
+			$data .= $el;
+		}
+		return $data;
+	}
+
+	/**
 	 * Generate a random id
 	 *
 	 * @param string $element An html element name to append to id
@@ -278,6 +292,22 @@ class UI
 		} else {
 			return $else;
 		}
+	}
+
+	/**
+	 * Fragment Component.
+	 * Literally does nothing. It just serves as an invisible container for your elements. 
+	 * (It doesn't render unto the DOM.)
+	 * 
+	 * @param array $children Children
+	 */
+	public static function _fragment(array $children)
+	{
+		$els = "";
+		$els .= self::loop($children, function ($child) {
+			return $child;
+		});
+		return $els;
 	}
 
 	/**
@@ -982,7 +1012,7 @@ class UI
 	/**
 	 * Render uppercase text
 	 * 
-	 * @param array|string $children Children
+	 * @param string $children Children
 	 * @param array $props Element props
 	 */
 	public static function _uppercase($children, array $props = [])
@@ -994,7 +1024,7 @@ class UI
 	/**
 	 * Render lowercase text
 	 * 
-	 * @param string|array $children Children
+	 * @param string $children Children
 	 * @param array $props Element props
 	 */
 	public static function _lowercase(string $children, array $props = [])
@@ -1062,6 +1092,54 @@ class UI
 		return self::div($props, [
 			self::input($type, $name, ["list" => $id]),
 			self::datalist($id, $list)
+		]);
+	}
+
+	/**
+	 * Custom preloader component
+	 * 
+	 * @param string|array $children Item to display as preloader
+	 * @param array $props Preloader properties
+	 */
+	public static function _preloader($children, array $props = [])
+	{
+		if (!isset($props["id"])) $props["id"] = "leaf-ui-preloader";
+		return self::_fragment([
+			self::_style([
+				"#{$props['id']}" => "
+					position: fixed !important;
+					z-index: 1000 !important;
+					top: 0 !important;
+					left: 0 !important;
+					width: 100% !important;
+					height: 100% !important;
+					display: flex !important;
+					justify-content: center !important;
+					align-items: center !important;
+					flex-direction: column;
+					background: white;
+				",
+				"#{$props['id']} > *" => "
+					width: 100px;
+				",
+				"#{$props['id']}.hidden" => "
+					animation: fadeOut 1.5s !important;
+					animation-fill-mode: forwards !important;
+				",
+				"@keyframes fadeOut" => [
+					"100%" => "
+						opacity: 0;
+						visibility: hidden;
+					"
+				]
+			]),
+			self::div($props, $children),
+			self::_script(["
+				window.addEventListener('load', function() {
+					const leafUILoader = document.getElementById('{$props['id']}');
+					leafUILoader.className += ' hidden';
+				});
+			"])
 		]);
 	}
 }
