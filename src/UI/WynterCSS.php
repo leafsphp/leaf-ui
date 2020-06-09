@@ -221,6 +221,27 @@ class WynterCSS extends \Leaf\UI {
 		return self::button($icon.$label, $props);
 	}
 
+	public static function _formGroup(array $children, array $props = [])
+	{
+		if (!isset($props["class"])) $props["class"] = "";
+		$props["class"] .= " form-group";
+		return self::div($props, $children);
+	}
+
+	public static function _formLabel(string $label, string $id = null, array $props = [])
+	{
+		if (!isset($props["class"])) $props["class"] = "";
+		$props["class"] .= " form-label";
+		return self::label($label, $id, $props);
+	}
+
+	public static function _formInput(string $type, string $name, array $props = [])
+	{
+		if (!isset($props["class"])) $props["class"] = "";
+		$props["class"] .= " form-input";
+		return self::input($type, $name, $props);
+	}
+
 	public static function _icon(string $icon, array $props = []) {
 		$props["class"] = isset($props["class"])  ? "icon icon-$icon " . $props["class"] : "icon icon-$icon";
 		if (isset($props["size"])) {
