@@ -242,6 +242,20 @@ class WynterCSS extends \Leaf\UI {
 		return self::input($type, $name, $props);
 	}
 
+	public static function _formTextarea(string $name, array $props = [], string $children = "")
+	{
+		if (!isset($props["class"])) $props["class"] = "";
+		$props["class"] .= " form-input";
+		return self::textarea($name, $props, $children);
+	}
+
+	public static function _formSelect(array $list, array $props = [])
+	{
+		if (!isset($props["class"])) $props["class"] = "";
+		$props["class"] .= " form-select";
+		return self::select($list, $props);
+	}
+
 	public static function _icon(string $icon, array $props = []) {
 		$props["class"] = isset($props["class"])  ? "icon icon-$icon " . $props["class"] : "icon icon-$icon";
 		if (isset($props["size"])) {

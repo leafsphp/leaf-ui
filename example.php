@@ -149,6 +149,13 @@ $html = $ui::body([
 			$ui::_formGroup([
 				$ui::_formLabel("Name", "idxxname"),
 				$ui::_formInput("text", "name", ["id" => "idxxname"])
+			]),
+			$ui::_formTextarea("description", [
+				"placeholder" => "Description"
+			]),
+			$ui::_formSelect([
+				"btc" => "Bitcoin",
+				"eth" => "Ethereum"
 			])
 		])
 	])
