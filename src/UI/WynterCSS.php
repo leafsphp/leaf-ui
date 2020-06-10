@@ -181,6 +181,30 @@ class WynterCSS extends \Leaf\UI {
 		return self::div($props, $children);
 	}
 
+	public static function _colourPicker(array $props = [])
+	{
+		// $props["class"] = isset($props["class"])  ? $props["class"] . " container" : "container";
+		$name = "";
+		if (isset($props["name"])) {
+			$name = $props["name"];
+			unset($props["name"]);
+		}
+		if (!isset($props["value"])) $props["value"] = "#5755d9";
+		return self::input("color", $name, $props);
+	}
+
+	public static function _datePicker(array $props = [])
+	{
+		// $props["class"] = isset($props["class"])  ? $props["class"] . " container" : "container";
+		$name = "";
+		if (isset($props["name"])) {
+			$name = $props["name"];
+			unset($props["name"]);
+		}
+		if (!isset($props["value"])) $props["value"] = "2020-5-18";
+		return self::input("date", $name, $props);
+	}
+
 	public static function _emptyState(array $props)
 	{
 		if (isset($props["action"])) {

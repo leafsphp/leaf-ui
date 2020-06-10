@@ -156,7 +156,9 @@ $html = $ui::body([
 			$ui::_formSelect([
 				"btc" => "Bitcoin",
 				"eth" => "Ethereum"
-			])
+			]),
+			$ui::_colourPicker(),
+			$ui::_datePicker(),
 		])
 	])
 ]);
